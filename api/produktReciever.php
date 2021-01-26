@@ -1,17 +1,21 @@
 <?php
-echo json_encode("test");
+session_start();
+
 try {
     
     if($_SERVER["REQUEST_METHOD"]==="POST"){
-    echo json_encode("kom inte till post_date");
+    
     
         if(isset($_POST["date"])){
-            
+           
             
             $date = $_POST["date"];
-            echo json_encode(true);
-
             
+            
+            $_SESSION["date"] = $date;
+            echo json_encode($_SESSION);
+
+            exit;
             
             
             

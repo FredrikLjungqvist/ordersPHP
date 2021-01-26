@@ -2,7 +2,7 @@
 
 async function setDate() {
 
-const dateToSave = document.getElementById("input").value
+const dateToSave = [{name: "olle", age: 15, happy: "yes"} ,{name: "lisa", age: 89, happy: "old and happy"}, "anna", "peter"]
    
     const body = new FormData()
     body.set("date", dateToSave)
@@ -15,28 +15,12 @@ const dateToSave = document.getElementById("input").value
 
 }
 
-
-/*let test = 20
-sendData()
-
-async function sendData() {
-    
-
-    const body = JSON.stringify(test)
-    
-    console.log(body)
-    let request = await makeRequest("./api/produktReciever.php", "POST", body)
-    console.log(request)
-
-
-}*/
-
 async function makeRequest(path, method, body) {
     try{
         const response = await fetch(path, {method, body})
-        console.log(response)
-        return response
         
+        return response.json()
+       
 
     }catch(err){
         console.error(err)
