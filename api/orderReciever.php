@@ -1,2 +1,7 @@
-Add order = POST
-Get all orders = GET
+
+
+<?php
+session_start();
+var_dump(json_encode($_SESSION["date"]));
+exit;
+?>
