@@ -1,28 +1,31 @@
 <?php
-class Product{
-    function __construct($name, $price, $weight) {
+class Product {
+    function __construct(/* $id*/$name, $price, $weight) {
+        /* $this->id = $id; */
         $this->name = $name;
         $this->price = $price;
         $this->weight = $weight;
     }
-   
-}
-//senast tillagt
-for ($i = 0; $i < $cart; $i++) {
-    $rawData = file_get_contents("https://randomuser.me/api/");
-    
-    $name = json_decode($rawData)->results[0]->name->first;
-    $apaInstance = new Product($name, "./apor/bild" . $imageCount . ".jpg", $price); 
+} 
 
-    $imageCount = incrementImageCount($imageCount);
+/* class Orderitem{
+    function __construct($productId, $quantity) {
+        $this->productId = $productId;
+        $this->quantity = $quantity;    
+    }
 
-    array_push($animalArray, $apaInstance);
+    public $product;
+    public $quantity;
 }
 
-$array = [[name:olle, price:20, weight:100]
-name: peter, price: 30 weight: 200
+class Order{
+    function __construct($orderItems) {
+        $this->orderItems = $orderItems;
+    }
+} */
 
-]
+
+
 
 
 
