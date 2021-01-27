@@ -12,19 +12,12 @@ try {
             echo json_encode(true);
 
             
-            
-            
-            
-            
-            
         }else{
             echo "fail";
             exit;
         } 
     }
 
-
-    
 
 } catch (Exception $error) {
     echo json_encode("fel i catch");
