@@ -1,3 +1,9 @@
+window.addEventListener("load", initSite)
+
+function initSite(){
+    renderProducts()
+}
+
 
 //Save cart to API reciever POST
 async function saveCart() {
@@ -19,37 +25,39 @@ const dateToSave = cart
 //Function to read and render product list GET
  async function renderProducts() {
     let response = await makeRequest("./api/produktReciever.php", "GET")
-    console.log(response)
+    /* console.log(response) */
 
-   /*  let renderContainer = document.getElementById("renderContainer")
+    let renderContainer = document.getElementById("renderContainer")
     for (let i =0; i< response.length; i++)
         {
             
             let button = document.createElement("button");
             button.id="addButton"
-            button.innerHTML =  "Lägg till i kundvagnen";
-            button.addEventListener("click", function() {addToCart(i)}); 
-
+            button.innerText =  "Lägg till i kundvagnen";
+            button.addEventListener("click", function() {addToCart(response, i)}); 
+            
+            renderContainer.innerHTML += "<br>" + response[i].name + "<br>" + response[i].price +  "<br>" +  response[i].weight + "<br>" 
             renderContainer.appendChild(button)
-            renderContainer.innerHTML = response[i].name + "<br>" + response[i].price +  "<br>" +  response[i].weight  + "<br>"+ button 
-        } */
+            console.log(response[i])
+            
+        } 
      
 
 }
 
-function addToCart(){
-    if(!cartlist){
+function addToCart(response, i){
+    let cartlist
+    if(cartlist){
+        
+        cartlist.push(response[i]);
+        console.log(cartlist + "exist")
+        
+    }else{
         cartlist = []
-        cartlist.push(respons(i));
-        return
-    }
-    else if (cartlist) {
-        cartlist.push(respons(i));
-        return
-    }
-    else{
-        console.log("Cart fail")
-        return
+        cartlist.push(response[i]);
+        
+        console.log(cartlist + "new")
+        
     }
 }
 

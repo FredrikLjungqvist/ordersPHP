@@ -1,29 +1,29 @@
 <?php
 
 
-/* require("./classes.php"); */
-require("./orderReciever.php");
+
+
 require("./productList.php");
 
 try {
     
     if($_SERVER["REQUEST_METHOD"]==="GET"){
         
-        /* echo json_encode("hej"); */
+        
                     
        
 
         if(!isset($_GET["response"])){
             
+         
+         
                    
-                    echo json_encode(unserialize($_GET["response"]));
-                    exit;                   
-                    
-
-                    /* $Response = $_GET["response"];
-                    echo json_encode($_GET);
-                    exit; */
-                    /* return $Response; */
+        
+        
+        
+            
+            echo json_encode($allProducts);
+            exit; 
         
         }else{
             echo json_encode("fail");
@@ -39,18 +39,7 @@ try {
     
 } 
 
-/*  Replaced by productList.API
-    $productArray=
-    [
-        ["name"=> "IphoneX", "price" => 8900, "weight" => 5000],
-        ["name"=> "Samsung S21", "price" => 13990, "weight" => 6000],
-        ["name"=> "Galaxy Fold", "price" => 22495, "weight" => 8000],
-        ["name"=> "Nokia 2110", "price" => 700, "weight" => 2000],
-        ["name"=> "Samsung Master Phone", "price" => 3899, "weight" => 3500],
-        ["name"=> "OnePlus", "price" => 2350, "weight" => 1999],
-        ["name"=> "Motorola oldOne", "price" => 499, "weight" => 1500],
-       
-    ]; */
+    
 
    
 /*     function loopArray($array, $i){

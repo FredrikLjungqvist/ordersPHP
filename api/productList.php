@@ -2,12 +2,12 @@
 
 require("./classes.php");
 
-/* $allProducts = [
+ $allProducts = [
     new Product(1, "IphoneX", 8900, 5000),
     new Product(2, "Samsung S21", 13990, 6000),
     new Product(3, "Galaxy Fold", 22495, 8000),
     new Product(4, "smartphone", 10000, 10000)
-]; */
+]; 
 
 
     $productArray=
