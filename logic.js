@@ -2,6 +2,7 @@ window.addEventListener("load", initSite)
 
 function initSite(){
     renderProducts()
+    makeshopbtn()
 }
 
 
@@ -36,28 +37,62 @@ const dateToSave = cart
             button.innerText =  "Lägg till i kundvagnen";
             button.addEventListener("click", function() {addToCart(response, i)}); 
             
-            renderContainer.innerHTML += "<br>" + response[i].name + "<br>" + response[i].price +  "<br>" +  response[i].weight + "<br>" 
-            renderContainer.appendChild(button)
-            console.log(response[i])
+            let name = document.createElement("h3")
+            name.innerText = response[i].name
+
+            let price = document.createElement("h4");
+            price.innerText= response[i].price
+
+            let weight = document.createElement("p")
+            weight.innerText=response[i].weight
+
+
+
+            /* renderContainer.innerHTML += "<br>" + response[i].name + "<br>" + response[i].price +  "<br>" +  response[i].weight + "<br>"  */
+            renderContainer.append(name, price, weight, button);
+            console.log("ordning product")
             
         } 
-     
-
+        
+    
+       
 }
 
+function makeshopbtn() {
+    
+
+    let shopBtn = document.createElement("button");
+    shopBtn.innerText = "slutför köp" 
+    shopBtn.addEventListener("click", shopButton);
+    document.getElementById("app").appendChild(shopBtn)
+    console.log("ordning2")
+}
+
+
+
+function createOrderItem() {
+    
+}
+
+
+async function shopButton() {
+    let body = json.stringifiy(cartlist)
+    console.log(body)
+
+    let cartItems = await makeRequest("./api/orderReciever.php", "POST", body)
+    console.log(cartItems)
+    
+}
+
+
+let cartlist = []
 function addToCart(response, i){
-    let cartlist
+    
     if(cartlist){
         
         cartlist.push(response[i]);
         console.log(cartlist + "exist")
-        
-    }else{
-        cartlist = []
-        cartlist.push(response[i]);
-        
-        console.log(cartlist + "new")
-        
+        return cartlist
     }
 }
 
@@ -83,4 +118,4 @@ async function makeRequest(path, method, body) {
     }catch(err){
         console.error(err)
     }
-} 
+}
