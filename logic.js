@@ -73,16 +73,16 @@ function makeshopbtn() {
 function createOrderItem() {
     
 }
-let cartlist = []
+
 
 async function shopButton() {
-    const bodytest = new FormData()
-    bodytest.set("cartItems", JSON.stringify(cartlist))
-    console.log(bodytest)  
+    const body = new FormData()
+    body.set("cartItems", JSON.stringify(cartlist))
+    console.log(body)  
     console.log(cartlist) 
     /* let body = JSON.stringify(cartlist)
     console.log(body)  */
-    let sentorder = await makeRequest("./api/orderReciever.php", "POST", bodytest)
+    let sentorder = await makeRequest("./api/orderReciever.php", "POST", body)
     
     console.log(sentorder, JSON.parse(sentorder))
     let render = document.getElementById("app")
@@ -123,29 +123,49 @@ async function shopButton() {
 
 
 
-function addToCart(response, i){
-    
-    let foundIndex = cartlist.findIndex((cartItem)=>{
-        return cartItem.product.id == response[i].id
-    })
+async function addToCart(response, i){
+   
+    let product = await makeRequest("./api/orderReciever.php", "GET")
+    let cartlist = [{
+        product: product,
+        quantity: 1
+    }]
+    let productToADD = response[i]
 
-    cartlist:ID = response:ID 
-    om dom är lika, cartlist quantitiy +1
 
-    if(!cartlist){
-       cartlist=[] 
-        cartlist.push({
-            product: response[i],
-            quantity: 1
-        })}else{
-            cartlist.push({
-                product: response[i],
-                quantity: 1})
-        } 
+    if (!cartlist) {
+        let cartlist=[]
+        }else{
+
+   
+   
+
+            
+            let indexFound = cartlist.findIndex((cartlist)=>{
+                return cartlist.product.id == productToADD.id})
         
-        return cartlist
-    
-}
+            if (indexFound !=-1) {
+                cartlist[indexFound].quantity++
+            }else{
+                cartlist.push({
+                    product: productToADD,
+                    quantity: 1
+
+            
+                
+                })
+
+            }
+        
+        console.log(cartlist)
+        
+        }
+    /* let body = new FormData()
+    body.set("cartItems", JSON.stringify(cartlist))
+    let test = await makeRequest("./api/orderReciever.php", "POST", body)
+    console.log(test) */
+    }
+
 
 
 var cart = [
