@@ -4,7 +4,7 @@ function initSite(){
     renderProducts()
     makeshopbtn()
 }
-
+//Hej hej
 
 //Save cart to API reciever POST
 async function saveCart() {
