@@ -26,8 +26,8 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
 
     } */
 
-    $orderList = $_POST["cartItems"];
-    echo json_encode(unserialize($_POST["cartItems"]));
+    $orderList = json_decode($_POST["cartItems"]);
+    echo json_encode($orderList);
 
     /* $orderList = unserialize($_SESSION["orderList"]);
     array_push($orderList, new Order($orderItems));

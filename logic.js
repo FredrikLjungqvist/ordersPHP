@@ -50,7 +50,7 @@ const dateToSave = cart
 
             /* renderContainer.innerHTML += "<br>" + response[i].name + "<br>" + response[i].price +  "<br>" +  response[i].weight + "<br>"  */
             renderContainer.append(name, price, weight, button);
-            console.log("ordning product")
+            
             
         } 
         
@@ -65,7 +65,7 @@ function makeshopbtn() {
     shopBtn.innerText = "slutför köp" 
     shopBtn.addEventListener("click", shopButton);
     document.getElementById("app").appendChild(shopBtn)
-    console.log("ordning2")
+    
 }
 
 
@@ -73,25 +73,48 @@ function makeshopbtn() {
 function createOrderItem() {
     
 }
-
+let cartlist = []
 
 async function shopButton() {
-    let body = json.stringifiy(cartlist)
-    console.log(body)
+    /* const bodytest = new FormData()
+    bodytest.set("cartItems", cartlist)
+    console.log(bodytest)  
+    console.log(cartlist) */
+    let body = JSON.stringify(cartlist)
+    console.log(body) 
+    /* let cartItems = await makeRequest("./api/orderReciever.php", "POST", bodytest)
+    console.log(cartItems) */
+    
 
-    let cartItems = await makeRequest("./api/orderReciever.php", "POST", body)
-    console.log(cartItems)
+   
+
+     // Default options are marked with *
+    const response = await fetch("./api/orderReciever.php", {
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      
+      headers: {
+        'Content-Type': 'application/json'
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      
+      body: body // body data type must match "Content-Type" header
+    });
+    return response.json(); // parses JSON response into native JavaScript objects 
+  
+  
+  
+  
     
 }
 
 
-let cartlist = []
+
 function addToCart(response, i){
     
     if(cartlist){
         
         cartlist.push(response[i]);
-        console.log(cartlist + "exist")
+        
         return cartlist
     }
 }
@@ -111,7 +134,7 @@ var cart = [
 async function makeRequest(path, method, body) {
     try{
         const response = await fetch(path, {method, body})
-        
+       
         return response.json()
        
 
