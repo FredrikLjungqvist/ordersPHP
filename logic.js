@@ -125,12 +125,26 @@ async function shopButton() {
 
 function addToCart(response, i){
     
-    if(cartlist){
-        
-        cartlist.push(response[i]);
+    let foundIndex = cartlist.findIndex((cartItem)=>{
+        return cartItem.product.id == response[i].id
+    })
+
+    cartlist:ID = response:ID 
+    om dom är lika, cartlist quantitiy +1
+
+    if(!cartlist){
+       cartlist=[] 
+        cartlist.push({
+            product: response[i],
+            quantity: 1
+        })}else{
+            cartlist.push({
+                product: response[i],
+                quantity: 1})
+        } 
         
         return cartlist
-    }
+    
 }
 
 
