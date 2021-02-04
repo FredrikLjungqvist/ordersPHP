@@ -76,19 +76,33 @@ function createOrderItem() {
 let cartlist = []
 
 async function shopButton() {
-    /* const bodytest = new FormData()
-    bodytest.set("cartItems", cartlist)
+    const bodytest = new FormData()
+    bodytest.set("cartItems", JSON.stringify(cartlist))
     console.log(bodytest)  
-    console.log(cartlist) */
-    let body = JSON.stringify(cartlist)
-    console.log(body) 
-    /* let cartItems = await makeRequest("./api/orderReciever.php", "POST", bodytest)
-    console.log(cartItems) */
+    console.log(cartlist) 
+    /* let body = JSON.stringify(cartlist)
+    console.log(body)  */
+    let sentorder = await makeRequest("./api/orderReciever.php", "POST", bodytest)
+    
+    console.log(sentorder, JSON.parse(sentorder))
+    let render = document.getElementById("app")
+    JSON.parse(sentorder).forEach(order => {
+        console.log(order, typeof(order))
+        let orderItem = document.createElement("div")
+        orderItem.innerHTML = order.name + order.price;
+        render.append(orderItem)
+    });
+
+    
+    
+        
+   
+    
     
 
    
 
-     // Default options are marked with *
+    /*  // Default options are marked with *
     const response = await fetch("./api/orderReciever.php", {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       
@@ -99,7 +113,7 @@ async function shopButton() {
       
       body: body // body data type must match "Content-Type" header
     });
-    return response.json(); // parses JSON response into native JavaScript objects 
+    return response.json(); // parses JSON response into native JavaScript objects  */
   
   
   

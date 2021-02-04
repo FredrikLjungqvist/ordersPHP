@@ -26,9 +26,11 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
 
     } */
 
-    $orderList = json_decode($_POST["cartItems"]);
-    echo json_encode($orderList);
-
+    $orderList = $_POST["cartItems"];
+    $_SESSION["cartList"]= serialize($_POST["cartItems"]);
+    $saveOrder = unserialize($_SESSION["cartList"]);
+    echo json_encode($saveOrder);
+    
     /* $orderList = unserialize($_SESSION["orderList"]);
     array_push($orderList, new Order($orderItems));
     $_SESSION["orderList"] = serialize($orderList);
